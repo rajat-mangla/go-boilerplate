@@ -1,0 +1,15 @@
+APP_NAME: boilerplate-service
+API:
+    LISTEN_ADDR: :8080
+    DEBUG_MODE: false
+CONFIG_FILE_PATH: ""
+LOG_LEVEL: error
+LOG_OUTPUT: console
+LOG_FORMAT: text
+SERVICE_TIMEOUT:
+    SAMPLE_SERVICE: 5s
+SWAGGER:
+    ENABLED: false
+    PATH: ""
+SAMPLE:
+    HOST: "sample-service.com"
