@@ -1,0 +1,1 @@
+-- Revert schema changes in this migration.
