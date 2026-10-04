@@ -2,7 +2,18 @@ APP_NAME: boilerplate-service
 API:
   LISTEN_ADDR: :8081
   DEBUG_MODE: false
-CONFIG_FILE_PATH: "test.application.yml"
+DB_ENABLED: true
+DB:
+  HOST: localhost
+  PORT: 5432
+  USER: postgres
+  PASSWORD: ""
+  NAME: boilerplate
+  CONNECT_TIMEOUT: 5s
+  MAX_OPEN_CONNS: 5
+  MAX_IDLE_CONNS: 1
+  CONN_MAX_LIFETIME: 5m0s
+  CONN_MAX_IDLE_TIME: 1m0s
 LOG_LEVEL: info
 LOG_OUTPUT: console
 LOG_FORMAT: text
@@ -12,4 +23,4 @@ SWAGGER:
   ENABLED: false
   PATH: ""
 SAMPLE:
-  HOST: "sample-service.com"
+  HOST: ""

@@ -17,32 +17,19 @@ const (
 func main() {
 	commands := []*cli.Command{
 		{
-			Name:  "start",
-			Usage: "starts the API server",
-			Flags: []cli.Flag{
-				&cli.StringFlag{
-					Name:    "config-file",
-					Aliases: []string{"c"},
-					Usage:   "YAML config file",
-					Value:   "",
-				},
-			},
+			Name:   "start",
+			Usage:  "starts the API server",
+			Flags:  []cli.Flag{configFileFlag("")},
 			Action: startAPIServer,
 		},
 		{
-			Name:  "generate-config",
-			Usage: "dumps application's default configuration into a YAML file",
-			Flags: []cli.Flag{
-				&cli.StringFlag{
-					Name:    "config-file",
-					Aliases: []string{"c"},
-					Usage:   "YAML config file",
-					Value:   "application.yml",
-				},
-			},
+			Name:   "generate-config",
+			Usage:  "dumps application's default configuration into a YAML file",
+			Flags:  []cli.Flag{configFileFlag("sample.application.yml")},
 			Action: generateDefaultConfig,
 		},
 	}
+	commands = append(commands, migrationCommands()...)
 
 	app := &cli.App{
 		Name:     name,
@@ -54,5 +41,14 @@ func main() {
 	if err != nil {
 		log.Err(err).Msg("")
 		os.Exit(1)
+	}
+}
+
+func configFileFlag(value string) cli.Flag {
+	return &cli.StringFlag{
+		Name:    "config-file",
+		Aliases: []string{"c"},
+		Usage:   "YAML config file",
+		Value:   value,
 	}
 }

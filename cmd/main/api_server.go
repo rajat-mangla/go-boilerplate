@@ -15,6 +15,11 @@ func startAPIServer(ctx *cli.Context) error {
 	if err != nil {
 		return err
 	}
+	defer func() {
+		if err := applicationContext.Close(); err != nil {
+			log.Err(err).Msg("close application resources")
+		}
+	}()
 
 	// init registry
 	clientRegistry := client.NewRegistry(*applicationContext.Config)
