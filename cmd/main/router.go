@@ -28,4 +28,9 @@ func addInternalRoutes(router *mux.Router, cfg config.Config, sr *service.Regist
 		Methods("GET").
 		Path("/internal/v1/sample").
 		Handler(handlers.SampleHandlerV1())
+
+	router.
+		Methods("POST").
+		Path("/internal/v1/repayment-plans").
+		Handler(handlers.CreateRepaymentPlanV1(sr.RepaymentPlan))
 }

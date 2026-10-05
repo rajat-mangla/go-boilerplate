@@ -98,6 +98,7 @@ invoked through `go tool`.
 | --- | --- | --- |
 | `GET` | `/ping` | Health check; returns `OK`. |
 | `GET` | `/internal/v1/sample` | Example API route. |
+| `POST` | `/internal/v1/repayment-plans` | Compute a Murabaha repayment plan. |
 
 Set `API.DEBUG_MODE: true` (or `DEBUG_MODE=true`) to enable Go profiling at
 `/debug/pprof/` and the Statsviz dashboard at `/debug/statsviz/`.
@@ -111,3 +112,5 @@ Set `API.DEBUG_MODE: true` (or `DEBUG_MODE=true`) to enable Go profiling at
 - `handlers/` — HTTP handlers and response helpers
 - `middleware/` — request context and panic recovery
 - `client/`, `service/` — client and service registries
+- `domain/` — pure business logic (e.g. Murabaha repayment-plan calculation)
+- `errors/` — `ServiceError`, a typed error carrying an HTTP status, code, and metadata
