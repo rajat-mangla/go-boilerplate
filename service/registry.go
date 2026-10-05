@@ -5,11 +5,11 @@ import (
 )
 
 type Registry struct {
-	// Define fields for the service registry
+	RepaymentPlan *RepaymentPlanService
 }
 
 func NewRegistry(_ config.Config) *Registry {
 	return &Registry{
-		// Initialize fields for the service registry
+		RepaymentPlan: NewRepaymentPlanService(),
 	}
 }

@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+
+	apperrors "github.com/rajat-mangla/go-boilerplate/errors"
 )
 
 // Interface guard.
@@ -59,4 +61,25 @@ func WriteJSON(w http.ResponseWriter, status int, v interface{}) {
 func WriteText(w http.ResponseWriter, status int, body string) {
 	w.WriteHeader(status)
 	_, _ = w.Write([]byte(body))
+}
+
+// ErrorResponse is the JSON shape written for every error response.
+type ErrorResponse struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
+// WriteError writes a generic error response, for failures that are not a
+// apperrors.ServiceError (e.g. unexpected internal errors).
+func WriteError(w http.ResponseWriter, status int, message string) {
+	WriteJSON(w, status, ErrorResponse{Message: message})
+}
+
+// WriteServiceError writes an error response derived from a
+// apperrors.ServiceError, using its status, code, and message.
+func WriteServiceError(w http.ResponseWriter, svcErr apperrors.ServiceError) {
+	WriteJSON(w, svcErr.GetResponseStatus(), ErrorResponse{
+		Code:    svcErr.GetCode(),
+		Message: svcErr.Error(),
+	})
 }
