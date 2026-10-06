@@ -27,5 +27,5 @@ func addInternalRoutes(router *mux.Router, cfg config.Config, sr *service.Regist
 	router.
 		Methods("GET").
 		Path("/internal/v1/sample").
-		Handler(handlers.SampleHandlerV1())
+		Handler(handlers.SampleHandlerV1(sr.SampleService))
 }

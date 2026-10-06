@@ -2,7 +2,7 @@ APP_NAME: boilerplate-service
 API:
   LISTEN_ADDR: :8081
   DEBUG_MODE: false
-DB_ENABLED: true
+DB_ENABLED: false
 DB:
   HOST: localhost
   PORT: 5432

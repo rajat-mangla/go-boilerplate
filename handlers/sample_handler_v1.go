@@ -2,16 +2,22 @@ package handlers
 
 import (
 	"net/http"
+
+	"github.com/rajat-mangla/go-boilerplate/handlers/request"
+	"github.com/rajat-mangla/go-boilerplate/handlers/response"
+	"github.com/rajat-mangla/go-boilerplate/service"
 )
 
-func SampleHandlerV1() http.HandlerFunc {
+func SampleHandlerV1(svc *service.SampleService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// Implementation for sample handler v1
-		w.WriteHeader(http.StatusOK)
-		WriteJSON(w, http.StatusOK, SampleResponse{Message: "Sample Handler V1 Response"})
-	}
-}
+		resp, err := svc.SampleResponse(request.ToSampleDomain(r))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusBadRequest)
+			return
+		}
 
-type SampleResponse struct {
-	Message string `json:"message"`
+		w.WriteHeader(http.StatusOK)
+		WriteJSON(w, http.StatusOK, response.SampleResponse{Message: resp})
+	}
 }

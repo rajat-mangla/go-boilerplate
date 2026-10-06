@@ -6,10 +6,12 @@ import (
 
 type Registry struct {
 	// Define fields for the service registry
+	SampleService *SampleService
 }
 
 func NewRegistry(_ config.Config) *Registry {
 	return &Registry{
 		// Initialize fields for the service registry
+		SampleService: NewSampleService(),
 	}
 }
